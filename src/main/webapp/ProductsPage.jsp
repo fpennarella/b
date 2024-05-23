@@ -84,6 +84,12 @@
 								String emailUtente = (String) session.getAttribute("email");
 								if (ruolo.compareTo("admin") == 0 || bean.getEmail().compareTo(emailUtente) == 0) {
 							%>	
+							
+							<%
+								if(inputString=="") {
+									<href="error500.jsp">//reindirizzamento alla pagina di errore error500 nel caso l'utente inserisca una stringa vuota
+								}
+							%>
 								<a href = "ProductControl?action=modificaForm&codice=<%=bean.getCodice()%>" class = "upd">
 								<span>
 									<i class = "far fa-edit" style="color: red"></i>
