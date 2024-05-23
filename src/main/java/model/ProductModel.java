@@ -113,7 +113,7 @@ public class ProductModel {
 		}
 		return (result != 0);
 	}
-	public synchronized Collection<ProductBean> doRetrieveAll(String where) throws SQLException {
+	public synchronized Collection<ProductBean> doRetrieveAll(String str) throws SQLException {
 		Connection connection = null;
 		Connection connection2 = null;
 		PreparedStatement preparedStatement = null;
@@ -121,7 +121,11 @@ public class ProductModel {
 
 		Collection<ProductBean> products = new LinkedList<ProductBean>();
 
-		String selectSQL = "SELECT * FROM " + ProductModel.TABLE_NAME + " WHERE deleted = 'false' AND nomeTipologia = '" + where + "'";
+		if(str!="Arredamento Casa" || str!="Action Figures" || str!="Gadgets") {//così è impossibile per l'utente uscire dai parametri prestabiliti 
+			System.out.println("inserire una tipologia valida");
+			return null;
+		}
+		String selectSQL = "SELECT * FROM " + ProductModel.TABLE_NAME + " WHERE deleted = 'false' AND nomeTipologia = '" + str + "'";
 		String sql2 = "SELECT AVG(votazione) FROM Recensione WHERE codiceProdotto = ?";
 		
 		try {
